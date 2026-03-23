@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Wishlist Manager</title>
+    <title>Jejak Keinginan</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +13,19 @@
 <body>
     <div class="container">
         <header>
-            <h1>Wishlist Saya</h1>
-            <p class="subtitle">Catat keinginan dan kelola keuangan Anda</p>
+            <h1>Jejak Keinginan</h1>
+            <p class="subtitle">Wujudkan Aspirasi melalui Presisi Keuangan.</p>
         </header>
 
         <section class="budget-section">
-            <label class="label" for="budgetInput">Budget ada berapa untuk saat ini?</label>
+            <div class="budget-header">
+                <label class="label" for="budgetInput">Budget ada berapa untuk saat ini?</label>
+                <button id="toggleVisibility" class="btn-toggle" title="Tampilkan/Sembunyikan Nominal">
+                    <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Path will be handled by JS -->
+                    </svg>
+                </button>
+            </div>
             <div class="input-wrapper">
                 <span class="currency-prefix">Rp</span>
                 <input type="text" id="budgetInput" placeholder="0">
@@ -29,10 +36,12 @@
             <label class="label">Tambah Wishlistmu</label>
             <div class="add-item-form">
                 <input type="text" id="itemNameInput" placeholder="Nama barang (cth: Sepatu)">
-                <input type="text" id="itemPriceInput" placeholder="Harga (Rp)">
-                <button id="addItemBtn" class="btn-add">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
+                <div class="input-group">
+                    <input type="text" id="itemPriceInput" placeholder="Harga (Rp)">
+                    <button id="addItemBtn" class="btn-add">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -65,7 +74,8 @@
         <!-- Tentang Section -->
         <section class="about-section">
             <h3>Tentang Aplikasi</h3>
-            <p>Wishlist Saya adalah alat bantu premium untuk merencanakan pembelian impian Anda. Masukkan budget yang Anda miliki (maksimal Rp 10 Miliyar), tambah barang yang Anda incar, dan biarkan aplikasi ini menghitung pencapaian finansial Anda. Dilengkapi dengan validasi cerdas dan fitur backup/restore data.</p>
+            <p>Jejak Keinginan: Navigasi Cerdas Menuju Barang Impian.
+Kelola target belanja hingga Rp 10 Miliar dengan sistem penghitung pencapaian otomatis. Dilengkapi fitur validasi pintar untuk memastikan rencana Anda tetap realistis, serta proteksi data melalui Backup & Restore. Simpan keinginan Anda hari ini, wujudkan kemudian.</p>
         </section>
     </div>
 

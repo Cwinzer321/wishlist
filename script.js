@@ -13,8 +13,12 @@ const MAX_VALUE = 10000000000;
 
 const state = {
     wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
-    budget: parseFloat(localStorage.getItem('budget')) || 0
+    budget: parseFloat(localStorage.getItem('budget')) || 0,
+    showNominal: localStorage.getItem('showNominal') === null ? true : localStorage.getItem('showNominal') === 'true'
 };
+
+const showNominalBtn = document.getElementById('toggleVisibility');
+const eyeIcon = document.getElementById('eyeIcon');
 
 // DOM Elements
 const budgetInput = document.getElementById('budgetInput');
@@ -33,9 +37,23 @@ function formatNumber(num) {
     return new Intl.NumberFormat('id-ID').format(num);
 }
 
+function formatDisplay(num) {
+    if (!state.showNominal) return '••••••';
+    return formatNumber(num);
+}
+
+function updateEyeIcon() {
+    if (state.showNominal) {
+        eyeIcon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
+    } else {
+        eyeIcon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`;
+    }
+}
+
 // Initialize
 function init() {
-    budgetInput.value = formatNumber(state.budget);
+    budgetInput.value = state.showNominal ? formatNumber(state.budget) : '••••••';
+    updateEyeIcon();
     render();
 
     // Event Listeners for Input Formatting
@@ -80,6 +98,23 @@ function init() {
     // Clear error on input
     itemNameInput.addEventListener('input', () => itemNameInput.classList.remove('input-error'));
     itemPriceInput.addEventListener('input', () => itemPriceInput.classList.remove('input-error'));
+
+    // Visibility Toggle
+    showNominalBtn.addEventListener('click', () => {
+        state.showNominal = !state.showNominal;
+        localStorage.setItem('showNominal', state.showNominal);
+        updateEyeIcon();
+        render();
+        budgetInput.value = state.showNominal ? formatNumber(state.budget) : '••••••';
+    });
+
+    budgetInput.addEventListener('focus', () => {
+        budgetInput.value = formatNumber(state.budget);
+    });
+
+    budgetInput.addEventListener('blur', () => {
+        if (!state.showNominal) budgetInput.value = '••••••';
+    });
 }
 
 function addItem() {
@@ -230,7 +265,7 @@ function render() {
             itemEl.innerHTML = `
                 <div class="item-info">
                     <span class="item-name">${item.name}</span>
-                    <span class="item-price">Rp ${formatNumber(item.price)}</span>
+                    <span class="item-price">Rp ${formatDisplay(item.price)}</span>
                     ${isAffordable ? '<span class="item-status">✓ Tercapai</span>' : ''}
                 </div>
                 <div class="item-actions">
@@ -244,7 +279,7 @@ function render() {
     }
 
     // Update Summary
-    totalCostEl.innerText = `Rp ${formatNumber(totalCost)}`;
+    totalCostEl.innerText = `Rp ${formatDisplay(totalCost)}`;
     achievedCountEl.innerText = `${achievedCount} / ${state.wishlist.length}`;
 }
 

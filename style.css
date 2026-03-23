@@ -81,6 +81,35 @@ h1 {
     letter-spacing: 0.05em;
 }
 
+.budget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.budget-header .label {
+    margin-bottom: 0;
+}
+
+.btn-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-toggle:hover {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
 .input-wrapper {
     position: relative;
     display: flex;
@@ -131,10 +160,16 @@ input:focus {
 }
 
 .add-item-form {
-    display: grid;
-    grid-template-columns: 1fr 120px 60px;
+    display: flex;
+    flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 2rem;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    gap: 0.75rem;
 }
 
 .btn-add {
@@ -322,9 +357,6 @@ input:focus {
 }
 
 @media (max-width: 480px) {
-    .add-item-form {
-        grid-template-columns: 1fr;
-    }
     .btn-add {
         padding: 0.75rem;
     }

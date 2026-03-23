@@ -1,8 +1,8 @@
-# 💎 Manager Wishlist Premium
+# 💎 Jejak Keinginan
 
-Aplikasi Wishlist yang modern, berperforma tinggi, dan memiliki desain visual yang menawan. Dibangun menggunakan Vanilla JS dan CSS untuk membantu Anda melacak target finansial, mengelola daftar keinginan, dan langsung melihat barang mana yang bisa dibeli berdasarkan budget Anda saat ini.
+Aplikasi pelacak daftar keinginan yang modern, berperforma tinggi, dan memiliki desain visual yang menawan. Dibangun menggunakan Vanilla JS dan CSS untuk membantu Anda melacak target finansial, mengelola daftar keinginan, dan langsung melihat barang mana yang bisa dibeli berdasarkan budget Anda saat ini.
 
-![Tampilan Aplikasi](https://via.placeholder.com/800x450.png?text=Manager+Wishlist+Premium)
+![Tampilan Aplikasi](https://via.placeholder.com/800x450.png?text=Jejak+Keinginan)
 
 ## ✨ Fitur Utama
 
