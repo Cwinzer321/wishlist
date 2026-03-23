@@ -45,4 +45,4 @@ Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) unt
 
 ---
 
-Dibuat dengan ❤️ oleh [Cwinzer321](https://github.com/Cwinzer321)
+Dibuat dengan ❤️ oleh [Raihan Yasykur](https://github.com/Cwinzer321)
