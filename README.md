@@ -1,48 +1,48 @@
-# 💎 Premium Wishlist Manager
+# 💎 Manager Wishlist Premium
 
-A modern, high-performance, and visually stunning Wishlist application built with Vanilla JS and CSS. Track your financial goals, manage your wishlist items, and instantly see which items are achievable based on your current budget.
+Aplikasi Wishlist yang modern, berperforma tinggi, dan memiliki desain visual yang menawan. Dibangun menggunakan Vanilla JS dan CSS untuk membantu Anda melacak target finansial, mengelola daftar keinginan, dan langsung melihat barang mana yang bisa dibeli berdasarkan budget Anda saat ini.
 
-![Screenshot Placeholder](https://via.placeholder.com/800x450.png?text=Premium+Wishlist+Manager)
+![Tampilan Aplikasi](https://via.placeholder.com/800x450.png?text=Manager+Wishlist+Premium)
 
-## ✨ Features
+## ✨ Fitur Utama
 
--   **🎨 Premium UI/UX**: Sleek dark mode design with glassmorphism effects and smooth micro-animations.
--   **💰 Dynamic Budget Matching**: Real-time calculation of affordable items based on your current nominal (budget).
--   **🇮🇩 Localized Formatting**: Automatic Indonesian currency formatting (e.g., `1.000.000`) for both display and inputs.
--   **💾 Local Persistence**: All data is securely stored in your browser's `localStorage`.
--   **📂 Backup & Restore**: Export your data to a `.json` file and restore it anytime to prevent data loss from cache clearing.
--   **📱 Fully Responsive**: Optimized for desktop, tablets, and mobile devices.
+-   **🎨 UI/UX Premium**: Desain *dark mode* yang elegan dengan efek *glassmorphism* dan micro-animation yang halus.
+-   **💰 Pencocokan Budget Dinamis**: Kalkulasi real-time untuk menentukan barang mana yang terjangkau berdasarkan budget/nominal Anda.
+-   **🇮🇩 Format Mata Uang Lokal**: Format Rupiah otomatis (contoh: `1.000.000`) baik pada tampilan maupun saat input data.
+-   **💾 Penyimpanan Lokal**: Semua data tersimpan aman di browser Anda melalui `localStorage`.
+-   **📂 Backup & Restore**: Ekspor data Anda ke file `.json` dan impor kembali kapan saja untuk mencegah kehilangan data jika cache browser dihapus.
+-   **📱 Responsif Penuh**: Tampilan optimal di desktop, tablet, maupun perangkat mobile.
 
-## 🚀 Getting Started
+## 🚀 Cara Memulai
 
-### Prerequisites
--   A modern web browser (Chrome, Firefox, Edge, Safari).
--   (Optional) A local server like **Laragon** or **VS Code Live Server**.
+### Prasyarat
+-   Browser web modern (Chrome, Firefox, Edge, Safari).
+-   (Opsional) Server lokal seperti **Laragon** atau VS Code Live Server.
 
-### Installation
-1.  Clone the repository:
+### Instalasi
+1.  Clone repositori ini:
     ```bash
     git clone https://github.com/Cwinzer321/wishlist.git
     ```
-2.  Open `index.html` in your browser.
+2.  Buka file `index.html` di browser Anda.
 
-## 🛠️ Tech Stack
--   **Structure**: HTML5 Semantic Elements
--   **Styling**: Vanilla CSS3 (Custom Variables, Flexbox, Grid, Backdrop-filter)
--   **Logic**: Vanilla JavaScript (ES6+, Intl.NumberFormat, LocalStorage API)
+## 🛠️ Teknologi yang Digunakan
+-   **Struktur**: HTML5 Semantic Elements
+-   **Gaya (Styling)**: Vanilla CSS3 (Custom Variables, Flexbox, Grid, Backdrop-filter)
+-   **Logika**: Vanilla JavaScript (ES6+, Intl.NumberFormat, LocalStorage API)
 
-## 📖 How to Use
-1.  **Enter your Budget**: Type your current available funds in the "Current Budget" field.
-2.  **Add Items**: Input the name and price of the items you desire.
-3.  **Monitor Progress**: Items you can afford will be highlighted in **green** with an "Achieved" badge.
-4.  **Manage Data**: Use the "Backup ke File" button to download your data as a backup. Use "Restore dari File" to load it back if needed.
+## 📖 Cara Penggunaan
+1.  **Masukkan Budget**: Ketik jumlah uang yang Anda miliki di kolom "Current Budget".
+2.  **Tambah Barang**: Masukkan nama dan harga barang yang Anda inginkan.
+3.  **Pantau Target**: Barang yang harganya masuk dalam budget akan otomatis ditandai warna **hijau** dengan lencana "Achieved".
+4.  **Kelola Data**: Gunakan tombol "Backup ke File" untuk mengunduh cadangan data. Gunakan "Restore dari File" untuk memuat kembali data jika diperlukan.
 
-## 🤝 Contributing
-Feel free to fork this project and submit pull requests for any features or improvements you'd like to see!
+## 🤝 Kontribusi
+Silakan fork proyek ini dan kirimkan *pull request* jika Anda ingin menambahkan fitur atau perbaikan!
 
-## 📝 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📝 Lisensi
+Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) untuk detailnya.
 
 ---
 
-Crafted with ❤️ by [Cwinzer321](https://github.com/Cwinzer321)
+Dibuat dengan ❤️ oleh [Cwinzer321](https://github.com/Cwinzer321)
