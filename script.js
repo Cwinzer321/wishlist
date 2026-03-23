@@ -160,8 +160,8 @@ function render() {
         wishlistContainer.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">💸</div>
-                <p>Your wishlist is empty.</p>
-                <small>Add something you want to buy!</small>
+                <p>Wishlist Anda masih kosong.</p>
+                <small>Tambah barang yang ingin Anda beli!</small>
             </div>
         `;
     } else {
@@ -176,7 +176,7 @@ function render() {
                 <div class="item-info">
                     <span class="item-name">${item.name}</span>
                     <span class="item-price">Rp ${formatNumber(item.price)}</span>
-                    ${isAffordable ? '<span class="item-status">✓ Achieved</span>' : ''}
+                    ${isAffordable ? '<span class="item-status">✓ Tercapai</span>' : ''}
                 </div>
                 <div class="item-actions">
                     <button class="btn-delete" onclick="deleteItem(${item.id})">

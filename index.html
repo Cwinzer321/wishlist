@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <header>
-            <h1>My Wishlist</h1>
-            <p class="subtitle">Track your dreams and finances in one place</p>
+            <h1>Wishlist Saya</h1>
+            <p class="subtitle">Catat keinginan dan kelola keuangan Anda</p>
         </header>
 
         <section class="budget-section">
-            <label class="label" for="budgetInput">Current Budget / Nominal</label>
+            <label class="label" for="budgetInput">Budget / Nominal Saat Ini</label>
             <div class="input-wrapper">
                 <span class="currency-prefix">Rp</span>
                 <input type="text" id="budgetInput" placeholder="0">
@@ -26,10 +26,10 @@
         </section>
 
         <section class="add-section">
-            <label class="label">Add New Item</label>
+            <label class="label">Tambah Barang Baru</label>
             <div class="add-item-form">
-                <input type="text" id="itemNameInput" placeholder="Item name (ex: iPhone 15)">
-                <input type="text" id="itemPriceInput" placeholder="Price (Rp)">
+                <input type="text" id="itemNameInput" placeholder="Nama barang (cth: iPhone 15)">
+                <input type="text" id="itemPriceInput" placeholder="Harga (Rp)">
                 <button id="addItemBtn" class="btn-add">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
@@ -39,7 +39,7 @@
         <section class="list-section">
             <div class="wishlist-summary">
                 <div class="summary-item">Total: <b id="totalCost">Rp 0</b></div>
-                <div class="summary-item">Achieved: <b id="achievedCount">0 / 0</b></div>
+                <div class="summary-item">Tercapai: <b id="achievedCount">0 / 0</b></div>
             </div>
             
             <div id="wishlistItems" class="wishlist-items">
@@ -60,6 +60,12 @@
                 </button>
                 <input type="file" id="fileInput" accept=".json" style="display: none;">
             </div>
+        </section>
+
+        <!-- Tentang Section -->
+        <section class="about-section">
+            <h3>Tentang Aplikasi</h3>
+            <p>Wishlist Saya adalah alat bantu sederhana untuk merencanakan pembelian impian Anda. Masukkan budget yang Anda miliki, tambahkan barang yang Anda incar, dan biarkan aplikasi ini menghitung apa saja yang sudah bisa Anda miliki hari ini!</p>
         </section>
     </div>
 

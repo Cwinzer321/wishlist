@@ -53,6 +53,7 @@ h1 {
     letter-spacing: -0.025em;
     background: linear-gradient(to right, #818cf8, #c084fc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
 }
@@ -258,6 +259,26 @@ input:focus {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-main);
     border-color: var(--primary);
+}
+
+.about-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.about-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+}
+
+.about-section p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
 }
 
 .empty-state {
