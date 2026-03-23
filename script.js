@@ -22,15 +22,13 @@ const addItemBtn = document.getElementById('addItemBtn');
 const wishlistContainer = document.getElementById('wishlistItems');
 const totalCostEl = document.getElementById('totalCost');
 const achievedCountEl = document.getElementById('achievedCount');
+const downloadBtn = document.getElementById('downloadBtn');
+const uploadBtn = document.getElementById('uploadBtn');
+const fileInput = document.getElementById('fileInput');
 
 // Helper to format number to ID-ID string with dot separator
 function formatNumber(num) {
     return new Intl.NumberFormat('id-ID').format(num);
-}
-
-// Helper to parse string with separators back to number
-function parseFormattedString(str) {
-    return parseFloat(str.replace(/\./g, '').replace(/,/g, '.')) || 0;
 }
 
 // Initialize
@@ -56,10 +54,14 @@ function init() {
 
     addItemBtn.addEventListener('click', addItem);
     
-    // Add item on Enter in price input
     itemPriceInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addItem();
     });
+
+    // Backup & Restore
+    downloadBtn.addEventListener('click', downloadData);
+    uploadBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', uploadData);
 }
 
 function addItem() {
@@ -93,6 +95,60 @@ function deleteItem(id) {
 function saveAndRender() {
     localStorage.setItem('wishlist', JSON.stringify(state.wishlist));
     render();
+}
+
+/**
+ * Backup Data (Download as JSON)
+ */
+function downloadData() {
+    const data = {
+        wishlist: state.wishlist,
+        budget: state.budget,
+        exportDate: new Date().toISOString()
+    };
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `wishlist_backup_${new Date().toLocaleDateString('id-ID').replace(/\//g, '-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+/**
+ * Restore Data (Upload from JSON)
+ */
+function uploadData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (data.wishlist && typeof data.budget === 'number') {
+                if (confirm('Import backup? This will replace your current wishlist.')) {
+                    state.wishlist = data.wishlist;
+                    state.budget = data.budget;
+                    budgetInput.value = formatNumber(state.budget);
+                    localStorage.setItem('budget', state.budget);
+                    saveAndRender();
+                    alert('Data restored successfully!');
+                }
+            } else {
+                alert('Invalid file format.');
+            }
+        } catch (err) {
+            alert('Error reading file: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+    // Reset file input so same file can be uploaded again
+    event.target.value = '';
 }
 
 function render() {
