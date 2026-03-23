@@ -3,11 +3,11 @@
  * Handles item management and budget matching
  */
 
-const defaultWishlist = [
-    { id: 1, name: "iPhone 15 Pro", price: 18000000 },
-    { id: 2, name: "Logitech MX Master 3S", price: 1500000 },
-    { id: 3, name: "Mechanical Keyboard", price: 800000 }
-];
+// const defaultWishlist = [
+//     { id: 1, name: "iPhone 15 Pro", price: 18000000 },
+//     { id: 2, name: "Logitech MX Master 3S", price: 1500000 },
+//     { id: 3, name: "Mechanical Keyboard", price: 800000 }
+// ];
 
 const state = {
     wishlist: JSON.parse(localStorage.getItem('wishlist')) || defaultWishlist,
@@ -35,7 +35,7 @@ function formatNumber(num) {
 function init() {
     budgetInput.value = formatNumber(state.budget);
     render();
-    
+
     // Event Listeners for Input Formatting
     budgetInput.addEventListener('input', (e) => {
         const rawValue = e.target.value.replace(/\D/g, '');
@@ -53,7 +53,7 @@ function init() {
     });
 
     addItemBtn.addEventListener('click', addItem);
-    
+
     itemPriceInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addItem();
     });
@@ -75,9 +75,9 @@ function addItem() {
             name,
             price
         });
-        
+
         saveAndRender();
-        
+
         // Clear inputs
         itemNameInput.value = '';
         itemPriceInput.value = '';
@@ -106,10 +106,10 @@ function downloadData() {
         budget: state.budget,
         exportDate: new Date().toISOString()
     };
-    
+
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    
+
     const a = document.createElement('a');
     a.href = url;
     a.download = `wishlist_backup_${new Date().toLocaleDateString('id-ID').replace(/\//g, '-')}.json`;
