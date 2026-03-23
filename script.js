@@ -9,8 +9,10 @@
 //     { id: 3, name: "Mechanical Keyboard", price: 800000 }
 // ];
 
+const MAX_VALUE = 10000000000;
+
 const state = {
-    wishlist: JSON.parse(localStorage.getItem('wishlist')) || defaultWishlist,
+    wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
     budget: parseFloat(localStorage.getItem('budget')) || 0
 };
 
@@ -39,7 +41,13 @@ function init() {
     // Event Listeners for Input Formatting
     budgetInput.addEventListener('input', (e) => {
         const rawValue = e.target.value.replace(/\D/g, '');
-        const numValue = parseInt(rawValue) || 0;
+        let numValue = parseInt(rawValue) || 0;
+        
+        if (numValue > MAX_VALUE) {
+            alert(`Budget tidak boleh melebihi Rp ${formatNumber(MAX_VALUE)} (10 Miliyar)!`);
+            numValue = MAX_VALUE;
+        }
+        
         state.budget = numValue;
         e.target.value = formatNumber(numValue);
         localStorage.setItem('budget', state.budget);
@@ -48,7 +56,13 @@ function init() {
 
     itemPriceInput.addEventListener('input', (e) => {
         const rawValue = e.target.value.replace(/\D/g, '');
-        const numValue = parseInt(rawValue) || 0;
+        let numValue = parseInt(rawValue) || 0;
+        
+        if (numValue > MAX_VALUE) {
+            alert(`Harga tidak boleh melebihi Rp ${formatNumber(MAX_VALUE)} (10 Miliyar)!`);
+            numValue = MAX_VALUE;
+        }
+        
         e.target.value = formatNumber(numValue);
     });
 
@@ -62,29 +76,70 @@ function init() {
     downloadBtn.addEventListener('click', downloadData);
     uploadBtn.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', uploadData);
+
+    // Clear error on input
+    itemNameInput.addEventListener('input', () => itemNameInput.classList.remove('input-error'));
+    itemPriceInput.addEventListener('input', () => itemPriceInput.classList.remove('input-error'));
 }
 
 function addItem() {
     const name = itemNameInput.value.trim();
     const priceStr = itemPriceInput.value;
-    const price = parseInt(priceStr.replace(/\D/g, '')) || 0;
+    const priceRaw = priceStr.replace(/\D/g, '');
+    const price = parseInt(priceRaw) || 0;
 
-    if (name && !isNaN(price) && price >= 0) {
-        state.wishlist.push({
-            id: Date.now(),
-            name,
-            price
-        });
+    // Reset errors
+    itemNameInput.classList.remove('input-error');
+    itemPriceInput.classList.remove('input-error');
 
-        saveAndRender();
-
-        // Clear inputs
-        itemNameInput.value = '';
-        itemPriceInput.value = '';
-        itemNameInput.focus();
-    } else {
-        alert('Please enter a valid item name and price.');
+    // Rule: wajib di isi jika ada salah satu yang terisi
+    if (!name && !priceRaw) {
+        return; // Silent if both empty
     }
+
+    if (name && (!priceRaw || price <= 0)) {
+        itemPriceInput.classList.add('input-error');
+        alert('Harga harus diisi jika nama barang sudah terisi!');
+        itemPriceInput.focus();
+        return;
+    }
+
+    if (price > MAX_VALUE) {
+        itemPriceInput.classList.add('input-error');
+        alert(`Harga tidak boleh melebihi Rp ${formatNumber(MAX_VALUE)} (10 Miliyar)!`);
+        itemPriceInput.focus();
+        return;
+    }
+
+    // Total Wishlist Limit Check
+    const currentTotal = state.wishlist.reduce((acc, item) => acc + item.price, 0);
+    if (currentTotal + price > MAX_VALUE) {
+        itemPriceInput.classList.add('input-error');
+        alert(`Total wishlist tidak boleh melebihi Rp ${formatNumber(MAX_VALUE)} (10 Miliyar)! (Total saat ini: Rp ${formatNumber(currentTotal)})`);
+        itemPriceInput.focus();
+        return;
+    }
+
+    if (!name && priceRaw) {
+        itemNameInput.classList.add('input-error');
+        alert('Nama barang harus diisi jika harga sudah terisi!');
+        itemNameInput.focus();
+        return;
+    }
+
+    // Success path (both filled)
+    state.wishlist.push({
+        id: Date.now(),
+        name,
+        price
+    });
+
+    saveAndRender();
+
+    // Clear inputs
+    itemNameInput.value = '';
+    itemPriceInput.value = '';
+    itemNameInput.focus();
 }
 
 function deleteItem(id) {

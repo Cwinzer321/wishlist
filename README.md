@@ -7,10 +7,11 @@ Aplikasi Wishlist yang modern, berperforma tinggi, dan memiliki desain visual ya
 ## ✨ Fitur Utama
 
 -   **🎨 UI/UX Premium**: Desain *dark mode* yang elegan dengan efek *glassmorphism* dan micro-animation yang halus.
--   **💰 Pencocokan Budget Dinamis**: Kalkulasi real-time untuk menentukan barang mana yang terjangkau berdasarkan budget/nominal Anda.
+-   **💰 Pencocokan Budget Dinamis**: Kalkulasi real-time untuk menentukan barang mana yang terjangkau berdasarkan budget/nominal Anda (Maksimal Rp 10 Miliyar).
+-   **✅ Validasi Cerdas**: Mencegah penambahan data yang tidak lengkap (wajib isi Nama jika Harga terisi, dan sebaliknya) dengan efek visual *shake*.
 -   **🇮🇩 Format Mata Uang Lokal**: Format Rupiah otomatis (contoh: `1.000.000`) baik pada tampilan maupun saat input data.
 -   **💾 Penyimpanan Lokal**: Semua data tersimpan aman di browser Anda melalui `localStorage`.
--   **📂 Backup & Restore**: Ekspor data Anda ke file `.json` dan impor kembali kapan saja untuk mencegah kehilangan data jika cache browser dihapus.
+-   **📂 Backup & Restore**: Ekspor data Anda ke file `.json` dan impor kembali kapan saja.
 -   **📱 Responsif Penuh**: Tampilan optimal di desktop, tablet, maupun perangkat mobile.
 
 ## 🚀 Cara Memulai
@@ -32,10 +33,10 @@ Aplikasi Wishlist yang modern, berperforma tinggi, dan memiliki desain visual ya
 -   **Logika**: Vanilla JavaScript (ES6+, Intl.NumberFormat, LocalStorage API)
 
 ## 📖 Cara Penggunaan
-1.  **Masukkan Budget**: Ketik jumlah uang yang Anda miliki di kolom "Current Budget".
-2.  **Tambah Barang**: Masukkan nama dan harga barang yang Anda inginkan.
+1.  **Masukkan Budget**: Ketik jumlah uang yang Anda miliki (Maksimal Rp 10.000.000.000).
+2.  **Tambah Barang**: Masukkan nama dan harga barang. Pastikan kedua kolom terisi jika Anda mulai mengisi salah satunya.
 3.  **Pantau Target**: Barang yang harganya masuk dalam budget akan otomatis ditandai warna **hijau** dengan lencana "Achieved".
-4.  **Kelola Data**: Gunakan tombol "Backup ke File" untuk mengunduh cadangan data. Gunakan "Restore dari File" untuk memuat kembali data jika diperlukan.
+4.  **Kelola Data**: Gunakan tombol "Backup ke File" untuk mengunduh cadangan data.
 
 ## 🤝 Kontribusi
 Silakan fork proyek ini dan kirimkan *pull request* jika Anda ingin menambahkan fitur atau perbaikan!
