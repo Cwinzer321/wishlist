@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wishlist Manager</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Wishlist</h1>
+            <p class="subtitle">Track your dreams and finances in one place</p>
+        </header>
+
+        <section class="budget-section">
+            <label class="label" for="budgetInput">Current Budget / Nominal</label>
+            <div class="input-wrapper">
+                <span class="currency-prefix">Rp</span>
+                <input type="text" id="budgetInput" placeholder="0">
+            </div>
+        </section>
+
+        <section class="add-section">
+            <label class="label">Add New Item</label>
+            <div class="add-item-form">
+                <input type="text" id="itemNameInput" placeholder="Item name (ex: iPhone 15)">
+                <input type="text" id="itemPriceInput" placeholder="Price (Rp)">
+                <button id="addItemBtn" class="btn-add">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="list-section">
+            <div class="wishlist-summary">
+                <div class="summary-item">Total: <b id="totalCost">Rp 0</b></div>
+                <div class="summary-item">Achieved: <b id="achievedCount">0 / 0</b></div>
+            </div>
+            
+            <div id="wishlistItems" class="wishlist-items">
+                <!-- Items will be injected here by JS -->
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
