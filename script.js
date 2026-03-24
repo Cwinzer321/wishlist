@@ -27,6 +27,7 @@ const itemPriceInput = document.getElementById('itemPriceInput');
 const addItemBtn = document.getElementById('addItemBtn');
 const wishlistContainer = document.getElementById('wishlistItems');
 const totalCostEl = document.getElementById('totalCost');
+const remainingBudgetEl = document.getElementById('remainingBudget');
 const achievedCountEl = document.getElementById('achievedCount');
 const downloadBtn = document.getElementById('downloadBtn');
 const uploadBtn = document.getElementById('uploadBtn');
@@ -280,6 +281,15 @@ function render() {
 
     // Update Summary
     totalCostEl.innerText = `Rp ${formatDisplay(totalCost)}`;
+    
+    const remaining = state.budget - totalCost;
+    remainingBudgetEl.innerText = `Rp ${formatDisplay(remaining)}`;
+    if (remaining < 0) {
+        remainingBudgetEl.classList.add('negative');
+    } else {
+        remainingBudgetEl.classList.remove('negative');
+    }
+
     achievedCountEl.innerText = `${achievedCount} / ${state.wishlist.length}`;
 }
 

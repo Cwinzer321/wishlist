@@ -10,6 +10,10 @@
     --border: rgba(255, 255, 255, 0.1);
 }
 
+.negative {
+    color: var(--danger) !important;
+}
+
 * {
     margin: 0;
     padding: 0;

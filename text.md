@@ -1,0 +1,1 @@
+ikuti total maka akan terbawa semua keinginan mu, contoh ipad harganya 5 juta rupiah dan headset 5 juta rupiah total 10 juta rupiah dan saya ada budget 5 juta rupiah nah saya mau
