@@ -21,6 +21,7 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* Improved base responsiveness */
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
@@ -32,6 +33,7 @@ body {
     background-image: 
         radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    overflow-x: hidden;
 }
 
 .container {
@@ -42,8 +44,9 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: 24px;
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
 }
 
 header {
@@ -217,12 +220,13 @@ input:focus {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 1rem;
+    padding: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: slideIn 0.3s ease-out;
+    gap: 1rem;
 }
 
 @keyframes slideIn {
@@ -262,7 +266,7 @@ input:focus {
 
 .item-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .btn-delete {
@@ -360,8 +364,105 @@ input:focus {
     background: rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 480px) {
-    .btn-add {
-        padding: 0.75rem;
+/* Responsive Media Queries */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Standard Mobile */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .wishlist-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+        padding: 0.75rem 0;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 0.5rem;
+    }
+
+    .summary-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .input-group {
+        grid-template-columns: 1fr 50px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .budget-section {
+        padding: 1rem;
+    }
+
+    .budget-section input {
+        font-size: 1.1rem;
+    }
+
+    .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .item-actions {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid var(--border);
+        padding-top: 0.75rem;
+    }
+
+    .management-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Height adjustments for very short screens */
+@media (max-height: 500px) {
+    body {
+        padding: 0.5rem;
+    }
+    
+    header {
+        margin-bottom: 1rem;
     }
 }
