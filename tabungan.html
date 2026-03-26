@@ -28,8 +28,9 @@
             </a>
         </nav>
 
-        <main id="tab-tabungan">
-            <section class="savings-dashboard">
+        <main id="tab-tabungan" class="dashboard-layout">
+            <div class="panel-left">
+                <section class="savings-dashboard">
                 <div class="balance-card">
                     <span class="label">Total Tabungan</span>
                     <h2 id="totalSavings">Rp 0</h2>
@@ -69,13 +70,16 @@
                     </div>
                 </div>
             </section>
+            </div>
 
-            <section class="history-section">
+            <div class="panel-right">
+                <section class="history-section">
                 <label class="label">Riwayat Transaksi</label>
                 <div id="savingsItems" class="wishlist-items">
                     <!-- Transactions will be injected here by JS -->
                 </div>
             </section>
+            </div>
         </main>
 
         <!-- Data Management Section -->

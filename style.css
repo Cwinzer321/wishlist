@@ -50,6 +50,45 @@ body {
     padding: 2.5rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 800px) {
+    .container {
+        max-width: 950px;
+        padding: 3rem;
+    }
+}
+
+/* Base Dashboard Layout (Mobile) */
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.panel-left, .panel-right {
+    width: 100%;
+}
+
+@media (min-width: 800px) {
+    /* Side-by-Side Dashboard Layout (Desktop) */
+    .dashboard-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    .panel-left {
+        flex: 0 0 380px; /* Fixed width side panel */
+        position: sticky;
+        top: 32px;
+    }
+
+    .panel-right {
+        flex: 1;
+        min-width: 0;
+    }
 }
 
 header {
@@ -746,4 +785,45 @@ input:focus {
     header {
         margin-bottom: 1rem;
     }
+}
+
+/* Toggle Switch Component */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255,255,255,0.1);
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 2px; bottom: 2px;
+  background-color: var(--text-muted);
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+  background-color: white;
+  box-shadow: 0 0 8px rgba(255,255,255,0.5);
 }

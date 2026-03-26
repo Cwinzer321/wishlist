@@ -13,6 +13,7 @@ const state = {
     savings: JSON.parse(localStorage.getItem('savings')) || [],
     budget: parseFloat(localStorage.getItem('budget')) || 0,
     showNominal: localStorage.getItem('showNominal') === null ? true : localStorage.getItem('showNominal') === 'true',
+    syncTabungan: localStorage.getItem('syncTabungan') === null ? true : localStorage.getItem('syncTabungan') === 'true',
     editingId: null,
     activeTab: 'wishlist'
 };
@@ -21,6 +22,9 @@ const state = {
 const showNominalBtn = document.getElementById('toggleVisibility');
 const eyeIcon = document.getElementById('eyeIcon');
 const budgetInput = document.getElementById('budgetInput');
+const syncToggle = document.getElementById('syncToggle');
+const syncLabel = document.getElementById('syncLabel');
+const syncSubtext = document.getElementById('syncSubtext');
 
 // DOM Elements - Wishlist
 const itemNameInput = document.getElementById('itemNameInput');
@@ -72,6 +76,7 @@ function saveState() {
     localStorage.setItem('savings', JSON.stringify(state.savings));
     localStorage.setItem('budget', state.budget);
     localStorage.setItem('showNominal', state.showNominal);
+    localStorage.setItem('syncTabungan', state.syncTabungan);
 }
 
 // Core// Initialize
@@ -90,12 +95,27 @@ function init() {
         
         // Manual Budget Override (Optional - synced by default)
         budgetInput.addEventListener('input', (e) => {
+            if (state.syncTabungan) return; // Prevent manual typing entirely if synced
             const rawValue = e.target.value.replace(/\D/g, '');
             state.budget = parseInt(rawValue) || 0;
             e.target.value = formatNumber(state.budget);
             saveState();
             render();
         });
+        
+        // Sync Toggle
+        if (syncToggle) {
+            syncToggle.checked = state.syncTabungan;
+            updateSyncUI();
+            syncToggle.addEventListener('change', (e) => {
+                state.syncTabungan = e.target.checked;
+                updateSyncUI();
+                if (state.syncTabungan) {
+                    render(); // recalculates and overwrites
+                }
+                saveState();
+            });
+        }
     }
 
     if (addTransBtn) {
@@ -124,6 +144,17 @@ function init() {
     }
 }
 
+function updateSyncUI() {
+    if (!syncToggle || !budgetInput) return;
+    budgetInput.readOnly = state.syncTabungan;
+    budgetInput.style.opacity = state.syncTabungan ? '0.6' : '1';
+    budgetInput.style.cursor = state.syncTabungan ? 'not-allowed' : 'text';
+    
+    syncLabel.textContent = state.syncTabungan ? 'Sinkron Otomatis (Aktif)' : 'Input Manual (Aktif)';
+    syncLabel.style.color = state.syncTabungan ? 'var(--primary)' : 'var(--text-main)';
+    syncSubtext.textContent = state.syncTabungan ? 'Tabungan akan menimpa saldo ini' : 'Saldo bebas diatur sendiri (Tidak Terkunci Tabungan)';
+}
+
 function render() {
     calculateSavings();
     if (wishlistContainer) renderWishlist();
@@ -144,7 +175,9 @@ function calculateSavings() {
     });
     
     const balance = income - expense;
-    state.budget = balance; // Sync total savings to budget
+    if (state.syncTabungan) {
+        state.budget = balance; // Sync total savings to budget
+    }
     
     if (totalSavingsEl) totalSavingsEl.textContent = `Rp ${formatDisplay(balance)}`;
     if (totalIncomeEl) totalIncomeEl.textContent = `Rp ${formatDisplay(income)}`;
@@ -193,18 +226,34 @@ function renderWishlist() {
         wishlistContainer.innerHTML = `<div class="empty-state">💸 Wishlist kosong</div>`;
     } else {
         const sorted = [...state.wishlist].sort((a, b) => {
-            if (b.priority !== a.priority) return b.priority - a.priority;
-            return b.id - a.id;
+            const aAffordable = state.budget >= a.price;
+            const bAffordable = state.budget >= b.price;
+            
+            // 1. Barang yang bisa dibeli muncul paling atas
+            if (aAffordable && !bAffordable) return -1;
+            if (!aAffordable && bAffordable) return 1;
+            
+            // 2. Urutan dari harga terkecil
+            if (a.price !== b.price) return a.price - b.price;
+            
+            // 3. Cadangan: berdasarkan urutan ditambahkan (ID)
+            return a.id - b.id;
         });
         
-        let runningBudget = state.budget;
         sorted.forEach(item => {
             totalCost += item.price;
-            let progress = runningBudget >= item.price ? 100 : (runningBudget > 0 ? (runningBudget / item.price) * 100 : 0);
-            runningBudget = Math.max(0, runningBudget - item.price);
+            
+            // Hitung secara independen terhadap total uang saat ini
+            let progress = state.budget >= item.price ? 100 : (state.budget > 0 ? (state.budget / item.price) * 100 : 0);
             
             const isAffordable = progress === 100;
             if (isAffordable) achievedCount++;
+            
+            let affordableHtml = '';
+            if (isAffordable) {
+                const count = Math.floor(state.budget / item.price);
+                affordableHtml = `<div style="font-size: 0.75rem; color: var(--success); margin-top: 8px; font-weight: 600;">✨ Anda bisa membeli ${count} buah ${item.name}</div>`;
+            }
 
             const card = document.createElement('div');
             card.className = `item-card ${isAffordable ? 'affordable' : ''}`;
@@ -217,6 +266,7 @@ function renderWishlist() {
                     <span class="item-name">${item.name}</span>
                     <span class="item-price">Rp ${formatDisplay(item.price)}</span>
                     <div class="item-progress-container"><div class="item-progress-bar" style="width: ${progress}%"></div></div>
+                    ${affordableHtml}
                 </div>
                 <div class="item-actions">
                     <button class="btn-delete" title="Edit" onclick="editItem(${item.id})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
