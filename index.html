@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <canvas id="particleCanvas"></canvas>
     <div class="container">
         <header>
             <h1>Jejak Keinginan</h1>
@@ -57,7 +58,7 @@
                 <span class="currency-prefix">Rp</span>
                 <input type="text" id="budgetInput" placeholder="0">
             </div>
-            <div class="sync-control" style="margin-top: 16px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.15); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+            <div class="sync-control" style="margin-top: 16px; display: flex; align-items: center; gap: 12px; background: rgba(3, 5, 8, 0.4); padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border);">
                 <label class="switch">
                     <input type="checkbox" id="syncToggle" checked>
                     <span class="slider"></span>
@@ -97,6 +98,12 @@
             <div class="progress-section">
                 <div class="progress-visual">
                     <svg viewBox="0 0 36 36" class="circular-chart">
+                        <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f0ff" />
+                                <stop offset="100%" stop-color="#b026ff" />
+                            </linearGradient>
+                        </defs>
                         <path class="circle-bg"
                             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         <path id="progressCircle" class="circle" stroke-dasharray="0, 100"
