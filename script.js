@@ -464,7 +464,7 @@ function uploadData(event) {
                 
                 saveState();
                 render();
-                alert('Data berhasil dipulihkan!');
+                alert('Data anda berhasil di pulihkan!');
                 event.target.value = ''; // Reset input
             }
         } catch (err) { 
